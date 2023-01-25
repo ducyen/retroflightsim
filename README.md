@@ -4,7 +4,7 @@ Quick and dirty attempt to replicate the visuals of late 80s / early 90s flight 
 
 ## Live demo
 
-[https://ruben3d.github.io/retroflightsim/dist](https://ruben3d.github.io/retroflightsim/dist)
+[https://ducyen.github.io/retroflightsim/dist/](https://ducyen.github.io/retroflightsim/dist/)
 
 ## Screenshots
 
