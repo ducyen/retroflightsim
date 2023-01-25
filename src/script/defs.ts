@@ -1,13 +1,13 @@
 
 export const FPS_CAP = 15; // FPS
 
-export const LO_H_RES = 320;
-export const LO_V_RES = 200;
-export const HI_H_RES = 640;
-export const HI_V_RES = 400;
+export const LO_H_RES = 480;
+export const LO_V_RES = 320;
+export const HI_H_RES = 480;
+export const HI_V_RES = 320;
 
-export const H_RES = 320;
-export const V_RES = 200;
+export const H_RES = 480;
+export const V_RES = 320;
 export const H_RES_HALF = H_RES / 2;
 export const V_RES_HALF = V_RES / 2;
 
