@@ -222,6 +222,10 @@ export class CanvasPainter {
         this.textRenderer.text(x, y, text, color, alignment, this.textEffect, this.textEffectColor);
     }
 
+    drawImage(image: CanvasImageSource, dx: number, dy: number){
+        this.ctx.drawImage(image, dx, dy);
+    }
+
     batch(): BatchCanvasPainter {
         this.ctx.beginPath();
         return this.batchPainter;

@@ -42,7 +42,21 @@ export class CockpitEntity implements Entity {
     constructor(private actor: PlayerEntity,
         private camera: THREE.PerspectiveCamera,
         private targetCamera: THREE.PerspectiveCamera,
-        private mapCamera: THREE.OrthographicCamera) { }
+        private mapCamera: THREE.OrthographicCamera) 
+    { 
+        this.cockpitImage = new Image();
+        this.cockpitImage.src = 'assets/MiG31_480x320.png';
+        if (this.cockpitImage.complete) {
+            this.onImageLoaded();
+        } else {
+            this.cockpitImage.addEventListener('load', this.onImageLoaded.bind(this));
+            this.cockpitImage.addEventListener('error', () => { throw Error(`Unable to load "${this.cockpitImage.src}"`) });
+        }
+    }
+    private onImageLoaded() {
+    }
+
+    private cockpitImage: HTMLImageElement;
 
     private aiPitch: number = 0;
     private aiRoll: number = 0;
@@ -152,6 +166,8 @@ export class CockpitEntity implements Entity {
         const C0_Y = Math.round(center.z + -normal.x);
         const C1_X = Math.floor(center.x + -normal.z);
         const C1_Y = Math.round(center.z + normal.x);
+
+        painter.drawImage(this.cockpitImage, 0, 0);
 
         painter.setBackground('#404042');
         painter.rectangle(AI_X - 2, AI_Y - 2, AI_SIZE + 3, AI_SIZE + 3, true);
