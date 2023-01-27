@@ -7,6 +7,7 @@ export class SceneCamera {
     private backgroundGround: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(COCKPIT_FOV, H_RES / V_RES, 100, 500000);
 
     constructor(private camera: THREE.PerspectiveCamera) {
+        camera.setViewOffset(1, 1, 0, 0.125, 1, 1);
         this.update();
     }
 
