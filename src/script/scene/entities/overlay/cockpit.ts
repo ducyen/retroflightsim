@@ -13,8 +13,13 @@ import { updateTargetCamera } from '../../utils';
 
 
 // Pixels
-export function CockpitMFDSize(height: number): number {
-    return Math.floor(height / 3.333);
+export function CockpitMFDSizeX(height: number): number {
+    return 60;
+}
+
+// Pixels
+export function CockpitMFDSizeY(height: number): number {
+    return 50;
 }
 
 // Pixels
@@ -29,12 +34,12 @@ export function CockpitMFD1Y(width: number, height: number, size: number): numbe
 
 // Pixels
 export function CockpitMFD2X(width: number, height: number, size: number): number {
-    return width - size - 1;
+    return 298;
 }
 
 // Pixels
 export function CockpitMFD2Y(width: number, height: number, size: number): number {
-    return height - size - 1;
+    return 182;
 }
 
 export class CockpitEntity implements Entity {
@@ -127,17 +132,19 @@ export class CockpitEntity implements Entity {
 
         const hudColor = PaletteColor(palette, PaletteCategory.HUD_TEXT);
 
+        const MFDSizeX = CockpitMFDSizeX(targetHeight);
+        const MFDSizeY = CockpitMFDSizeY(targetHeight);
+        this.renderMFD1(
+            CockpitMFD1X(targetWidth, targetHeight, MFDSizeX),
+            CockpitMFD1Y(targetWidth, targetHeight, MFDSizeY),
+            MFDSizeX, painter, hudColor);
+        this.renderMFD2(
+            CockpitMFD2X(targetWidth, targetHeight, MFDSizeX),
+            CockpitMFD2Y(targetWidth, targetHeight, MFDSizeY),
+            MFDSizeX, MFDSizeY, painter, hudColor, palette);
+
         this.renderAttitudeIndicator(targetWidth, targetHeight, painter, palette);
 
-        const MFDSize = CockpitMFDSize(targetHeight);
-        this.renderMFD1(
-            CockpitMFD1X(targetWidth, targetHeight, MFDSize),
-            CockpitMFD1Y(targetWidth, targetHeight, MFDSize),
-            MFDSize, painter, hudColor);
-        this.renderMFD2(
-            CockpitMFD2X(targetWidth, targetHeight, MFDSize),
-            CockpitMFD2Y(targetWidth, targetHeight, MFDSize),
-            MFDSize, painter, hudColor, palette);
     }
 
     private renderAttitudeIndicator(targetWidth: number, targetHeight: number, painter: CanvasPainter, palette: Palette) {
@@ -313,25 +320,25 @@ export class CockpitEntity implements Entity {
             .commit();
     }
 
-    private renderMFD2(x: number, y: number, size: number, painter: CanvasPainter, hudColor: string, palette: Palette) {
+    private renderMFD2(x: number, y: number, sizeX: number, sizeY: number, painter: CanvasPainter, hudColor: string, palette: Palette) {
         painter.setColor(hudColor);
-        painter.rectangle(x - 1, y - 1, size + 2, size + 2);
+        painter.rectangle(x - 1, y - 1, sizeX + 2, sizeY + 2);
 
         if (this.weaponsTarget === undefined) {
             painter.setBackground(PaletteColor(palette, PaletteCategory.COCKPIT_MFD_BACKGROUND));
-            painter.rectangle(x, y, size, size, true);
-            painter.text(x + CHAR_MARGIN, y + size - CHAR_HEIGHT - CHAR_MARGIN, 'No target', hudColor);
+            painter.rectangle(x, y, sizeX, sizeY, true);
+            painter.text(x + CHAR_MARGIN, y + sizeY - CHAR_HEIGHT - CHAR_MARGIN, 'No target', hudColor);
         } else {
-            painter.clear(x, y, size, size);
+            painter.clear(x, y, sizeX, sizeY);
             painter.text(x + CHAR_MARGIN, y + CHAR_MARGIN,
                 this.weaponsTarget.targetType, hudColor);
             painter.text(x + CHAR_MARGIN, y + CHAR_MARGIN * 2 + CHAR_HEIGHT,
                 `at ${this.weaponsTarget.targetLocation}`, hudColor);
-            painter.text(x + CHAR_MARGIN, y + size - 2 * (CHAR_HEIGHT + CHAR_MARGIN),
+            painter.text(x + CHAR_MARGIN, y + sizeY - 2 * (CHAR_HEIGHT + CHAR_MARGIN),
                 `BRG ${formatBearing(this.weaponsTargetBearing)}`, hudColor);
-            painter.text(x + size - CHAR_MARGIN, y + size - 2 * (CHAR_HEIGHT + CHAR_MARGIN),
+            painter.text(x + sizeY - CHAR_MARGIN, y + sizeY - 2 * (CHAR_HEIGHT + CHAR_MARGIN),
                 `${this.weaponsTargetZoomFactor.toFixed(0)}x`, hudColor, TextAlignment.RIGHT);
-            painter.text(x + CHAR_MARGIN, y + size - CHAR_HEIGHT - CHAR_MARGIN,
+            painter.text(x + CHAR_MARGIN, y + sizeY - CHAR_HEIGHT - CHAR_MARGIN,
                 `Range ${this.weaponsTargetRange.toFixed(1)} KM`, hudColor);
         }
     }
