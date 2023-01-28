@@ -8,6 +8,8 @@ export class SceneCamera {
 
     constructor(private camera: THREE.PerspectiveCamera) {
         camera.setViewOffset(1, 1, 0, 0.125, 1, 1);
+        this.backgroundSky.setViewOffset(1, 1, 0, 0.125, 1, 1);
+        this.backgroundGround.setViewOffset(1, 1, 0, 0.125, 1, 1);
         this.update();
     }
 
