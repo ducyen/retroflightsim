@@ -486,13 +486,13 @@ export class Game {
 
         this.scene.add(this.player);
 
-        const hud = new HUDEntity(this.player);
-        this.cockpitEntities.push(hud);
-        this.scene.add(hud);
-
         const cockpit = new CockpitEntity(this.player, this.playerCamera.main, this.targetCamera.main, this.mapCamera);
         this.cockpitEntities.push(cockpit);
         this.scene.add(cockpit);
+
+        const hud = new HUDEntity(this.player);
+        this.cockpitEntities.push(hud);
+        this.scene.add(hud);
 
         const exteriorData = new ExteriorDataEntity(this.player);
         exteriorData.enabled = false;

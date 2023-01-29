@@ -82,17 +82,17 @@ export class HUDEntity implements Entity {
         painter.setColor(hudColor);
 
         const halfWidth = targetWidth / 2;
-        const halfHeight = targetHeight / 2;
+        const halfHeight = 130;
 
-        const altitudeX = targetWidth - 20;
+        const altitudeX = 288 - 10;
         const altitudeY = halfHeight;
         this.renderAltitude(altitudeX, altitudeY, targetWidth, painter, hudColor);
 
         const bearingX = halfWidth;
-        const bearingY = 10;
+        const bearingY = 80 + 10;
         this.renderBearing(bearingX, bearingY, painter, hudColor);
 
-        const airSpeedX = 19;
+        const airSpeedX = 192 + 9;
         const airSpeedY = halfHeight;
         this.renderAirSpeed(airSpeedX, airSpeedY, painter, hudColor);
 

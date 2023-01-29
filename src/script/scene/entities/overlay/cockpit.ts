@@ -24,7 +24,7 @@ export function CockpitMFDSizeY(height: number): number {
 
 // Pixels
 export function CockpitMFD1X(width: number, height: number, size: number): number {
-    return 1;
+    return 210;
 }
 
 // Pixels

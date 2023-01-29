@@ -7,9 +7,9 @@
         "build:prod": "webpack --mode=production",
         "serve": "ws -d dist"
     },
-    "author": "Ruben Moreno Montoliu <ruben3d@gmail.com>",
+    "author": "Duc Hoang <duc.hoangmy@gmail.com>",
     "license": "MIT",
-    "homepage": "https://github.com/ruben3d/retroflightsim",
+    "homepage": "https://github.com/ducyen/retroflightsim",
     "dependencies": {
         "three": "0.136.0"
     },
